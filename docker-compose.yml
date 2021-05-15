@@ -1,0 +1,15 @@
+version: '3.9'
+services: 
+    package-service-sql:
+        image:  mcr.microsoft.com/mssql/server:2017-latest
+        environment:
+            SA_PASSWORD: "Str0ngPassw0rd+"
+            ACCEPT_EULA: "Y"
+        ports: 
+            - "1433:1433"
+    package-service-api:
+        build: .
+        ports:
+            - "5005:80"
+        depends_on: 
+            - package-service-sql
